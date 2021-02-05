@@ -1,0 +1,9 @@
+description: |
+  More details about this package.
+maintainer:
+  - "@github_id"
+  - "email@example.com"
+license: "Apache License Version 2.0"
+url: "https://homepage.io"
+labels:
+  category: test
