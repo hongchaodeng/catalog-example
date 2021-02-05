@@ -4,3 +4,5 @@ modules:
         repo: https://wonderflow.info/kubewatch/archives/
         name: kubewatch
         version: 0.1.0
+  - native:
+      path: ./definitions/trait.yaml
