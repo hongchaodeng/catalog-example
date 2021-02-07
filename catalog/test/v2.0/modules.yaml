@@ -4,4 +4,4 @@ modules:
       name: kubewatch
       version: 0.1.0
   - native:
-      path: ./definitions/trait.yaml
+      path: definitions/trait.yaml # relative path to the modules.yaml
