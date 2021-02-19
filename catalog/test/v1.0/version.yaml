@@ -1,0 +1,6 @@
+description: First version
+labels:
+  - helm
+  - autoscaling
+  - light-weight
+  - cloud-native

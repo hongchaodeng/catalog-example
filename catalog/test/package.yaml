@@ -5,5 +5,3 @@ maintainers:
   - "email@example.com"
 license: "Apache License Version 2.0"
 url: "https://homepage.io"
-labels:
-  category: test

@@ -33,6 +33,8 @@ All packages are put under `/catalog/` dir (this is configurable). The directory
     category: test
   ```
 
+- `version.yaml`: This describes the metadata of a package version. It adds `labels` which will be indexed on server side to provide label-select queries.
+
 - `caps.json`: This describes the capabilities that a pacakge (in specific version) provides. It tells the name, the type (Workload/Trait), and the json schema of inputs.
 
   ```json
@@ -43,6 +45,19 @@ All packages are put under `/catalog/` dir (this is configurable). The directory
       "jsonschema": "..."
     }
   ]
+  ```
+
+- `modules.yaml`: defining the modules that contain the actual resources, e.g. Helm Charts or Terraform modules. Note that we choose to integrate with existing community solutions instead of inventing our own format. In this way we can adopt the reservoir of community efforts and make the design extensible to more in-house formats as we have observed.
+
+  ```yaml
+  modules:
+    - helm: # Helm module to install/upgrade
+        repo: https://wonderflow.info/kubewatch/archives/
+        name: kubewatch
+        version: 0.1.0
+    - native: # Native k8s yaml to apply
+        path: definitions/trait.yaml # relative path to the modules.yaml
+        url: https://git.io/vPieo
   ```
 
 - `conditions/`: defining conditional checks before deploying this package. For example, check if a CRD with specific version exist, if not then the deployment should fail.
@@ -74,17 +89,4 @@ All packages are put under `/catalog/` dir (this is configurable). The directory
             - name: pre-install-job
               image: "pre-install:v1"
               command: ["/bin/pre-install"]
-  ```
-
-- `modules.yaml`: defining the modules that contain the actual resources, e.g. Helm Charts or Terraform modules. Note that we choose to integrate with existing community solutions instead of inventing our own format. In this way we can adopt the reservoir of community efforts and make the design extensible to more in-house formats as we have observed.
-
-  ```yaml
-  modules:
-    - helm: # Helm module to install/upgrade
-        repo: https://wonderflow.info/kubewatch/archives/
-        name: kubewatch
-        version: 0.1.0
-    - native: # Native k8s yaml to apply
-        path: definitions/trait.yaml # relative path to the modules.yaml
-        url: https://git.io/vPieo
   ```
