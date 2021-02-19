@@ -32,6 +32,8 @@ All packages are put under `/catalog/` dir (this is configurable). The directory
     category: test
   ```
 
+- `caps.json`: This describes the capabilities that a pacakge (in specific version) provides. It tells the name, the type (Workload/Trait), and the json schema of inputs.
+
 - `conditions/`: defining conditional checks before deploying this package. For example, check if a CRD with specific version exist, if not then the deployment should fail.
 
   ```yaml
