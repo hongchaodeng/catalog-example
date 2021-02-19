@@ -35,16 +35,18 @@ All packages are put under `/catalog/` dir (this is configurable). The directory
 
 - `version.yaml`: This describes the metadata of a package version. It adds `labels` which will be indexed on server side to provide label-select queries.
 
-- `caps.json`: This describes the capabilities that a pacakge (in specific version) provides. It tells the name, the type (Workload/Trait), and the json schema of inputs.
+- `caps.yaml`: This describes the capabilities that a pacakge (in specific version) provides. It tells the name, the type (Workload/Trait), and the json schema of inputs.
 
-  ```json
-  [
-    {
-      "name": "WebService",
-      "type": "Workload",
-      "jsonschema": "..."
-    }
-  ]
+  ```yaml
+  - name: WebService
+    type: Workload
+    schema:
+      path: ../schema/webservice.schema.json
+      # url: https://remote-address-of-schema
+  - name: Routing
+    type: Trait
+    schema:
+      path: ../schema/routing.schema.json
   ```
 
 - `modules.yaml`: defining the modules that contain the actual resources, e.g. Helm Charts or Terraform modules. Note that we choose to integrate with existing community solutions instead of inventing our own format. In this way we can adopt the reservoir of community efforts and make the design extensible to more in-house formats as we have observed.

@@ -1,0 +1,9 @@
+- name: WebService
+  type: Workload
+  schema:
+    path: ../schema/webservice.schema.json
+    # url: https://remote-address-of-schema
+- name: Routing
+  type: Trait
+  schema:
+    path: ../schema/routing.schema.json
