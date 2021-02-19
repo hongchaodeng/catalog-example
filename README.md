@@ -8,7 +8,7 @@ All packages are put under `/catalog/` dir (this is configurable). The directory
     |-- package.yaml
     |-- v1.0 # a package consists of multiple versions
         |-- modules.yaml
-        |-- caps.json
+        |-- caps.yaml
         |-- conditions/
             |-- check-crd.yaml
         |-- hooks/
