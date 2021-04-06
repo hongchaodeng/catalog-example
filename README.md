@@ -4,22 +4,22 @@ All packages are put under `/catalog/` dir (this is configurable). The directory
 
 ```bash
 /catalog/ # a catalog consists of multiple packages 
-|-- <package>
+|-- <package> # a package consists of multiple versions
     |-- package.yaml
-    |-- v1.0 # a package consists of multiple versions
+    |-- 1.0
         |-- modules.yaml
         |-- caps.yaml
         |-- conditions/
             |-- check-crd.yaml
         |-- hooks/
             |-- pre-install.yaml
-    |-- v2.0
+    |-- 2.0 # must be semver
 |-- <package>
 ```
 
 - Note that each package directory name will be the package name. Each version directory name will be the version name.
 
-- `package.yaml`: This is package-level metadata across all versions.
+- `package.yaml`: This is package-level metadata.
 
   ```yaml
   description: |
@@ -29,27 +29,32 @@ All packages are put under `/catalog/` dir (this is configurable). The directory
     - "email@example.com"
   license: "Apache License Version 2.0"
   url: "https://homepage.io"
-  labels:
-    category: test
+
+  tags: # This will be indexed and serve in package searching.
+    - helm
+    - autoscaling
+    - light-weight
+    - cloud-native
   ```
 
-- `version.yaml`: This describes the metadata of a package version. It adds `labels` which will be indexed on server side to provide label-select queries.
-
-- `caps.yaml`: This describes the capabilities that a pacakge (in specific version) provides. It tells the name, the type (Workload/Trait), and the json schema of inputs.
+- `definitions.yaml`: This defines the definitions that a pacakge (in specific version) provides. It tells the name, the type (Application/Workload/Trait), and the json schema exposed for user input.
 
   ```yaml
   - name: WebService
     type: Workload
     schema:
       path: ../schema/webservice.schema.json
-      # url: https://remote-address-of-schema
   - name: Routing
     type: Trait
     schema:
       path: ../schema/routing.schema.json
+  - name: MyApp
+    type: Application
+    schema:
+      path: ../schema/myapp.schema.json
   ```
 
-- `modules.yaml`: defining the modules that contain the actual resources, e.g. Helm Charts or Terraform modules. Note that we choose to integrate with existing community solutions instead of inventing our own format. In this way we can adopt the reservoir of community efforts and make the design extensible to more in-house formats as we have observed.
+- `modules.yaml`: It defines the modules that contain the actual resources, e.g. Helm Charts or Terraform modules. Note that the design extensible to more module/package formats (e.g. CloudFormation templates).
 
   ```yaml
   modules:
@@ -62,7 +67,7 @@ All packages are put under `/catalog/` dir (this is configurable). The directory
         url: https://git.io/vPieo
   ```
 
-- `conditions/`: defining conditional checks before deploying this package. For example, check if a CRD with specific version exist, if not then the deployment should fail.
+- `conditions/`: It defines conditional checks before deploying this package. For example, check if a CRD with specific version exist, if not then the deployment should fail.
 
   ```yaml
   # check-crd.yaml
