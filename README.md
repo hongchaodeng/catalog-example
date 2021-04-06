@@ -37,11 +37,11 @@ All packages are put under `/catalog/` dir (this is configurable). The directory
     - cloud-native
   ```
 
-- `definitions.yaml`: This defines the definitions that a pacakge (in specific version) provides. It tells the name, the type (Application/Workload/Trait), and the json schema exposed for user input.
+- `definitions.yaml`: This defines the definitions that a pacakge (in specific version) provides. It tells the name, the type (Application/Component/Trait), and the json schema exposed for user input.
 
   ```yaml
   - name: WebService
-    type: Workload
+    type: Component
     schema:
       path: ../schema/webservice.schema.json
   - name: Routing

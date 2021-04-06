@@ -1,5 +1,5 @@
 - name: WebService
-  type: Workload
+  type: Component
   schema:
     path: ../schema/webservice.schema.json
     # url: https://remote-address-of-schema
